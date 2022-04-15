@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sito_gestione_voli/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="bg-dark">
+        <div class="row row-cols-auto p-2 text-white fixed row align-items-center d-flex justify-content-center">
+          {% load static %}
+            <img src="{% static 'sito_gestione_voli/pngegg.png' %}" style="margin-right: 5rem" alt="logo">
+            <p class="col m-2 fs-3">Voli</p>
+            <p class="col m-2 fs-3">Hotel</p>
+            <p class="col m-2 fs-3">Attività</p>
+            <p class="col m-2 fs-3">Destinazioni</p>
+            <p class="col m-2 fs-3">Altro <i class="bi bi-chevron-down"></i></p>
+            <p class="col m-2 fs-3" style="padding-left: 9rem">Account</p>
+        </div>
+    </div>
+
+
+
+      <div class="container position-absolute top-50 start-50 translate-middle">
+        <div class="card ">
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+              <div class="container row">
+                <div class="col-2 custom-control custom-radio">
+                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label fs-5" id="andata_ritorno">Andata e ritorno</label> <!--id: andata_ritorno-->
+                </div>
+                <div class="col custom-control custom-radio">
+                  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label fs-5" id="solo_andata">Solo andata</label> <!--id: solo_andata-->
+                </div>
+              </div>
+            </ul>
+          </div>
+
+          <form class="needs-validation" novalidate>
+          <div class="card-body row m-2 bg-opacity-10">
+            <div class="col">
+              <p>Andata</p>
+              <input type="text" class="form-control" id="andata" placeholder="digitare areoporto di partenza" required>
+            </div>
+            <div class="col">
+              <p>Ritorno</p>
+              <input type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+            </div>
+
+            
+            <div class="row"> <!-- NEONATI BAMBINI E ADULTI -->
+            
+              
+              <div class="row ">
+                <div class="col-5 " style="margin-top: 1rem;">
+                  <div class="row" >
+                    <div class="col" style="margin-top: 0.35rem;">data di andata: </div>
+                    <div class="col" style="margin-left: -17rem;"><input type="date" class="form-control" id="andata" placeholder="digitare destinazione" min="2022-03-30" required></div> <!--id: andata-->
+                  </div>
+                  
+                  
+                  
+                </div>
+                <div class="col-2" style="margin-top: 1rem;">
+                  <a style="margin-right: 1rem; ">Neonati:</a> 
+                  <button type="button" class="btn btn-secondary" onclick="neo(1)">+</button>
+                  <a id="neonati" value="0" >0</a> 
+                  <button type="button" class="btn btn-secondary" onclick="neo(0)">-</button>
+                </div>
+                <div class="col-2" style="margin-top: 1rem;">
+                  <a style="margin-right: 1rem; ">Bambini:</a> 
+                  <button type="button" class="btn btn-secondary" onclick="bam(1)">+</button>
+                  <a id="bambini" value="0">0</a> 
+                  <button type="button" class="btn btn-secondary" onclick="bam(0)">-</button>
+                </div>
+                <div class="col-2" style="margin-top: 1rem;">
+                  <a style="margin-right: 1rem; ">Adulti:</a> 
+                  <button type="button" class="btn btn-secondary" onclick="adu(1)">+</button>
+                  <a id="adulti" value="0">1</a> 
+                  <button type="button" class="btn btn-secondary" onclick="adu(0)">-</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  <div class="row" style="margin-top: 1rem">
+                    <div class="col" style="margin-top: 0.35rem;">data di ritorno: </div>
+                    <div class="col" style="margin-left: -17rem;"><input type="date" class="form-control" id="ritorno" placeholder="digitare destinazione" min="2022-03-30" required></div> <!--id: ritorno-->
+                  </div>
+                </div>
+                <div class="col-2" style=" margin-left: 4.7rem;">
+                  <a style="color: darkgray;">da 0 a 2 anni</a>
+                </div>
+                <div class="col-2">
+                  <a style="color: darkgray;">da 3 a 12 anni</a>
+                </div>
+                <div class="col-2" style=" margin-left: -1.5rem;">
+                  <a style="color: darkgray;">da 12 anni in poi</a>
+                </div>
+              </div>
+              
+
+            
+            </div>
+          
+          
+          <button class="mt-4 btn btn-warning col " type="submit">Avanti</button>
+        </div>
+        </form>
+        </div>
+      </div>
+
+
+<script>
+  //qui metti altri script
+  var a= "a";
+
+</script>
+
+<script>
+  function k(utenti,segno){
+    var tot = document.getElementById(utenti);
+    var t = tot.innerHTML;
+    if (segno==0){
+      if (t >0){
+        t--;
+      }
+      if (utenti == "adulti" && t<1)
+      {
+        t=1;
+      }
+    } 
+    if (segno==1){
+      t++;
+    }
+    tot.innerHTML = t;
+  }
+  function neo(segno){
+    u="neonati";
+    k(u,segno);
+  }
+  function bam(segno){
+    u="bambini";
+    k(u,segno);
+  }
+  function adu(segno){
+    u="adulti";
+    k(u,segno);
+  }
+  
+</script>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>

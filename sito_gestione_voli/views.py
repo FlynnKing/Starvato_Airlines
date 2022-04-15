@@ -1,7 +1,0 @@
-from django.shortcuts import render
-
-# Create your views here.
-def home (request):
-    return render(request, 'sito_gestione_voli/index.html')
-def admin_panel(request):
-    return render(request, 'sito_gestione_voli/pannello_amministratore.html')
