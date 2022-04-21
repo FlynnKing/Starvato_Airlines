@@ -30,7 +30,7 @@ class Fly(models.Model):
     andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "inizio")
     ritorno = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
 
-class prenotazione(models.Model):
+class Prenotazione(models.Model):
     andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
     ritorno = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
     date_andate = models.DateField() #assicurati che si scriva così
