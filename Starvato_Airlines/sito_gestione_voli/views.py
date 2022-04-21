@@ -2,7 +2,7 @@ from re import A
 from django.http import JsonResponse
 from django.shortcuts import render
 from requests import post
-from serializers import *
+from .serializers import *
 
 
 
@@ -30,10 +30,10 @@ class TestView(APIView):
         return Response(serialized.data)
 
     def get(self, request, *args, **kwargs):
-        qs = Aircraft.objects.all()
+        qs = Fly.objects.all()
         all_obj_db = qs.first()
         #serialized = PostSerialized(qs, many = True)
-        serialized = AircraftSerialized(all_obj_db)
+        serialized = FlySerialized(all_obj_db)
         return Response(serialized.data)
 
     def get(self, request, *args, **kwargs):
@@ -65,7 +65,4 @@ def home (request):
 
 def admin_panel(request):
     return render(request, 'sito_gestione_voli/pannello_amministratore.html')
-#DOMANDE:
-# 1. dovrebbe fare le viste, perché si mettono funzioni dove ritornano qualcosa? e poi cosa ritornano?
-# 2. 
-# 3. 
+

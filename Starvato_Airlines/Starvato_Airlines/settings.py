@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'Starvato_Airlines.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_areoporto',
-        'USER' : 'postgres',
-        'PASSWORD' : 's',
-        'HOST' : 'localhost',
+        'NAME': 'xuubzohp',
+        'USER' : 'xuubzohp',
+        'PASSWORD' : 'HC-mWKbfp6FHC0FHP4m6w7YPfLXOvZvT',
+        'HOST' : 'tyke.db.elephantsql.com',
         'PORT' : '5432'
     }
 }
