@@ -19,7 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.home, name = 'home'),
+    #path('home/', views.home, name = 'home'),
+    path('riepilogo', views.riepilogo, name = 'riepilogo'),
     path('sito_gestione_voli/', include ('sito_gestione_voli.urls')),
 
     #path('api-auth/', include('rest_framework.urls')),

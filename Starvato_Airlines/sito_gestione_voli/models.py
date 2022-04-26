@@ -1,3 +1,5 @@
+from pyexpat import model
+from re import S
 from django.db import models
 
 # Create your models here.
@@ -16,6 +18,9 @@ class Airport(models.Model):
     iata_code = models.CharField(max_length=200)
     local_code = models.CharField(max_length=200)
     coordinates = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+
 
 
 class Aircraft(models.Model):
@@ -23,6 +28,27 @@ class Aircraft(models.Model):
     locate = models.CharField(max_length=300)
     country = models.CharField(max_length=100)
     region = models.CharField(max_length=50)
+    
+
+class posti(models.Model):
+    class posto(models.TextChoices):
+        prima_classe_libero = 'prima classe libero', ('prima classe libero')
+        prima_classe_occupato = 'prima classe occupato', ('prima classe occupato')
+        seconda_classe_libero = 'seconda classe libero', ('seconda classe libero')
+        seconda_classe_occupato = 'seconda classe occupato', ('seconda classe occupato')
+    stato_del_posto = models.CharField(
+        max_length=40,
+        choices=posto.choices,
+        default=posto.prima_classe_libero,
+    )
+    tot_posti = models.ForeignKey(Aircraft, on_delete=models.SET_NULL, null=True)
+    def __str__(self):
+        return self.stato_del_posto   
+
+
+
+
+
 
 class Fly(models.Model):
     Aircraft = models.ForeignKey(Aircraft, on_delete=models.SET_NULL, null=True)

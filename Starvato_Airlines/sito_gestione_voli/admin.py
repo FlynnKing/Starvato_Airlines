@@ -8,5 +8,6 @@ admin.site.register(Fly)
 admin.site.register(Prenotazione)
 admin.site.register(Ruolo)
 admin.site.register(Personale)
+admin.site.register(posti)
 
 

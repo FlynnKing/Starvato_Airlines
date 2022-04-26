@@ -7,22 +7,30 @@
             <ul class="nav nav-pills card-header-pills">
               <div class="container row">
                 <div class="col-2 custom-control custom-radio">
-                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                  <input type="radio" id="R1" name="customRadio" class="custom-control-input">
                   <label class="custom-control-label fs-5" id="andata_ritorno">Andata e ritorno</label> <!--id: andata_ritorno-->
                 </div>
                 <div class="col custom-control custom-radio">
-                  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                  <input type="radio" id="R2" name="customRadio" class="custom-control-input">
                   <label class="custom-control-label fs-5" id="solo_andata">Solo andata</label> <!--id: solo_andata-->
                 </div>
               </div>
             </ul>
           </div>
 
-          <form class="needs-validation" novalidate method="POST" action="{% url '' %}">
+          
+          <form class="needs-validation" novalidate method="POST" action="{% url 'riepilogo' %}">
           <div class="card-body row m-2 bg-opacity-10">
             <div class="col">
               <p>Andata</p>
-              <input type="text" class="form-control" id="andata" placeholder="digitare areoporto di partenza" required>
+              <!--<input type="text" class="form-control" id="andata" placeholder="digitare areoporto di partenza" required>-->
+              
+                
+              
+                <select class="form-control" aria-labelledby="dropdownMenuLink" name="selezione" >
+                  <option class="dropdown-item" value="#">Action</option>
+                </select>
+              
             </div>
             <div class="col">
               <p>Ritorno</p>
