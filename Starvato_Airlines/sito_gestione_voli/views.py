@@ -1,11 +1,5 @@
 from django.shortcuts import render
-from requests import post, get
-from .serializers import *
-#TERZO PARTY imports
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from .serializers import *
+from .form import *
 from .models import *
 '''
 def get(self, request, *args, **kwargs):
@@ -55,11 +49,16 @@ def get(self, request, *args, **kwargs):
 def home (request):
     all_airports = Airport.objects.all()
     # [andata_e_ritorno, soltanto_andata, _andata, _ritorno, _neonati, _bambini, _adulti, date_andata, date_ritorno]
-    
+    flyForm = FlyForm() # creo prima la classe
     context = {
-        'all_airports' : all_airports
-
+        'all_airports' : all_airports,
+        'flyForm':flyForm
     }
+    if flyForm.is_valid(): # vedo se i campi sono validi con gli attributi del modello relativo
+        people = request.POST['persone']
+        filt = Fly.objects.filter(start=request.POST['start'], arrive=request.POST['arrive'], date=request.POST['date'], free_seats__gte = request.POST['persone'])
+        
+    
     return render(request, 'sito_gestione_voli/index.html', context)
 
 def admin_panel(request):

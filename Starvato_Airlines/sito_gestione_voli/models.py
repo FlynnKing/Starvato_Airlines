@@ -29,6 +29,7 @@ class Aircraft(models.Model):
     locate = models.CharField(max_length=300)
     country = models.CharField(max_length=100)
     region = models.CharField(max_length=50)
+    tot_posti = models.IntegerField()
     
 
 class posti(models.Model):
