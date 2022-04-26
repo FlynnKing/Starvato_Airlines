@@ -12,8 +12,8 @@ from .serializers import *
 from .models import *
 
 
-https://github.com/P4na/starvato_airlines/blob/version4/definitive_airlines/starvato_airlines/views.py
-https://github.com/P4na/starvato_airlines/blob/version4/definitive_airlines/starvato_airlines/templates/home.html
+
+'''
 def get(self, request, *args, **kwargs):
     all_airports = Airport.objects.all()
     all_obj_db = all_airports.first()
@@ -55,12 +55,18 @@ def get(self, request, *args, **kwargs):
     #serialized = PostSerialized(qs, many = True)
     serialized = AircraftSerialized(all_obj_db)
     return Response(serialized.data)
-
-
+'''
 
 # Create your views here.
 def home (request):
-    return render(request, 'sito_gestione_voli/index.html')
+    all_airports = Airport.objects.all()
+    # [andata_e_ritorno, soltanto_andata, _andata, _ritorno, _neonati, _bambini, _adulti, date_andata, date_ritorno]
+    
+    context = {
+        'all_airports' : all_airports
+
+    }
+    return render(request, 'sito_gestione_voli/index.html', context)
 
 def admin_panel(request):
     return render(request, 'sito_gestione_voli/pannello_amministratore.html')

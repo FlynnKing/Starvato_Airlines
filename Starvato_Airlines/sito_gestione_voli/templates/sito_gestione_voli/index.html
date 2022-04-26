@@ -7,12 +7,12 @@
             <ul class="nav nav-pills card-header-pills">
               <div class="container row">
                 <div class="col-2 custom-control custom-radio">
-                  <input type="radio" id="R1" name="customRadio" class="custom-control-input">
-                  <label class="custom-control-label fs-5" id="andata_ritorno">Andata e ritorno</label> <!--id: andata_ritorno-->
+                  <input type="radio" id="R1" name="andata_e_ritorno" class="custom-control-input">
+                  <label class="custom-control-label fs-5">Andata e ritorno</label> <!--id: andata_ritorno-->
                 </div>
                 <div class="col custom-control custom-radio">
-                  <input type="radio" id="R2" name="customRadio" class="custom-control-input">
-                  <label class="custom-control-label fs-5" id="solo_andata">Solo andata</label> <!--id: solo_andata-->
+                  <input type="radio" id="R2" name="soltanto_andata" class="custom-control-input" checked>
+                  <label class="custom-control-label fs-5">Solo andata</label> <!--id: solo_andata-->
                 </div>
               </div>
             </ul>
@@ -20,21 +20,35 @@
 
           
           <form class="needs-validation" novalidate method="POST" action="{% url 'riepilogo' %}">
+            {% csrf_token %} 
           <div class="card-body row m-2 bg-opacity-10">
             <div class="col">
               <p>Andata</p>
-              <!--<input type="text" class="form-control" id="andata" placeholder="digitare areoporto di partenza" required>-->
               
-                
-              
-                <select class="form-control" aria-labelledby="dropdownMenuLink" name="selezione" >
-                  <option class="dropdown-item" value="#">Action</option>
-                </select>
+              <input name="_andata" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+              <datalist id="areoporti">
+                {% for i in all_airports %}
+                <option class="dropdown-item">
+                  {{i}}
+                </option>
+                {% endfor %}
+              </select>
+              </datalist>
               
             </div>
             <div class="col">
               <p>Ritorno</p>
-              <input type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+              
+              <input name="_ritorno" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+              <datalist id="areoporti">
+                {% for i in all_airports %}
+                <option class="dropdown-item">
+                  {{i}}
+                </option>
+                {% endfor %}
+              </select>
+              </datalist>
+                           
             </div>
 
             
@@ -45,7 +59,7 @@
                 <div class="col-5 " style="margin-top: 1rem;">
                   <div class="row" >
                     <div class="col" style="margin-top: 0.35rem;">data di andata: </div>
-                    <div class="col" style="margin-left: -17rem;"><input type="date" class="form-control" id="andata" placeholder="digitare destinazione" min="2022-03-30" required></div> <!--id: andata-->
+                    <div class="col" style="margin-left: -17rem;"><input name="date_andata" id="data_andata" type="date" class="form-control" placeholder="digitare destinazione" min="" onchange="Data()" required></div> <!--id: andata-->
                   </div>
                   
                   
@@ -54,19 +68,19 @@
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Neonati:</a> 
                   <button type="button" class="btn btn-secondary" onclick="neo(1)">+</button>
-                  <a id="neonati" value="0" >0</a> 
+                  <a name="_neonati" id="neonati" value="0" >0</a> 
                   <button type="button" class="btn btn-secondary" onclick="neo(0)">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Bambini:</a> 
                   <button type="button" class="btn btn-secondary" onclick="bam(1)">+</button>
-                  <a id="bambini" value="0">0</a> 
+                  <a name="_bambini" id="bambini" value="0">0</a> 
                   <button type="button" class="btn btn-secondary" onclick="bam(0)">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Adulti:</a> 
                   <button type="button" class="btn btn-secondary" onclick="adu(1)">+</button>
-                  <a id="adulti" value="0">1</a> 
+                  <a name="_adulti" id="adulti" value="0">1</a> 
                   <button type="button" class="btn btn-secondary" onclick="adu(0)">-</button>
                 </div>
               </div>
@@ -74,7 +88,7 @@
                 <div class="col-5">
                   <div class="row" style="margin-top: 1rem">
                     <div class="col" style="margin-top: 0.35rem;">data di ritorno: </div>
-                    <div class="col" style="margin-left: -17rem;"><input type="date" class="form-control" id="ritorno" placeholder="digitare destinazione" min="2022-03-30" required></div> <!--id: ritorno-->
+                    <div class="col" style="margin-left: -17rem;"><input name="date_ritorno" id="data_ritorno" type="date" class="form-control" placeholder="digitare destinazione" min="" onchange="data()" required></div> <!--id: ritorno-->
                   </div>
                 </div>
                 <div class="col-2" style=" margin-left: 4.7rem;">
@@ -93,7 +107,7 @@
             </div>
           
           
-          <button href="{% url 'contattaci' %}" class="mt-4 btn btn-warning col " type="submit">Avanti</button>
+          <button class="mt-4 btn btn-warning col " type="submit">Avanti</button>
         </div>
         </form>
         </div>
@@ -101,12 +115,21 @@
 
       
 <script>
-  //qui metti altri script
-  var a= "a";
+  //    mettere il minimo della data
+  document.getElementById('data_andata').min = new Date().toISOString().split("T")[0];
+  document.getElementById('data_ritorno').min = new Date().toISOString().split("T")[0];
 
-</script>
+  function data()
+  {
+    document.getElementById('data_andata').max = document.getElementById('data_ritorno').value;
+  }
 
-<script>
+  function Data()
+  {
+    document.getElementById('data_ritorno').min = document.getElementById('data_andata').value;
+  }
+    
+
   function k(utenti,segno){
     var tot = document.getElementById(utenti);
     var t = tot.innerHTML;
@@ -137,9 +160,7 @@
     k(u,segno);
   }
   
-</script>
 
-<script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function() {
     'use strict';
