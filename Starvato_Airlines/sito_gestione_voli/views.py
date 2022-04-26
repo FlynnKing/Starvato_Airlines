@@ -1,18 +1,12 @@
 from django.shortcuts import render
 from requests import post, get
 from .serializers import *
-
-
-
 #TERZO PARTY imports
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .models import *
-
-
-
 '''
 def get(self, request, *args, **kwargs):
     all_airports = Airport.objects.all()

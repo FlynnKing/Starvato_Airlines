@@ -1,0 +1,84 @@
+Nella prenotazione
+	1) Specificare Solo Andata o Andata/Ritorno
+	2) Specificare partenza
+	3) Destinazione
+	4) Data Partenza 
+	5) Data Ritorno
+	
+Schemi
+	1) Aeroporto {
+		id,
+		identification,
+		type,
+		name,
+		latitude_deg,
+		longitude_deg,
+		elevation_ft,
+		continent,
+		iso_country,
+		iso_region,
+		municipality,
+		gps_code,
+		iata_code,
+		local_code
+	}
+	2) Volo
+		{
+			AP: => Schema 1
+			AA : => Schema 1
+			Ora_P :=> Date
+			Ora_arrivo :=> Date
+			Posti : {
+				primaClasse: Intero,
+				secondaClasse : => Intero,
+				Economy : => Intero 
+			}
+			Scheduling : {
+				GiornoPartenza : => [Data]
+			}
+			CodiceVolo: => Char
+			Operatore : => Char
+			Aeromobile : => Schema 3
+			distanza : => Distanza Percorsa
+			Personale_volo : => [Peronale]
+			Personale_Ass : => [Peronale]
+		}
+	3) Aeromobile := {
+		
+		codice : => Char,
+		modello : => Char,
+		config : => {
+			
+			posti_prima : => Intero,
+			posti_seconda : => Intero,
+			posti_economy : => Intero
+		
+		},
+		
+		percorrenza : => Intero
+		stato : => Bool
+		ultima_manutenzione : => Data,
+		km_da_manutenzione : => Intero
+		manutenzione_km : => Intero
+		manutenzione_giorni : => Intero
+		kilometri_percorsi : => Intero,
+		personale_pilota : => Intero,
+		personale_assistenza : => Intero
+	
+	}
+	
+	Personale := {
+		nome : Char,
+		cognome : Char,
+		mansione : Char,
+		ruolo : ENUM (Volo,Assistenza,Terra,Amministrazione),
+		codice_personale : Char	
+	}
+	
+	
+TODO:
+	1) Schema AIRP
+	2) Schema Fly
+	3) Schema Aereo
+	4) Schema Personale
+	3) Utility Estrazione dati

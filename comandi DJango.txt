@@ -1,0 +1,48 @@
+> django-admin startproject [nome_progetto]
+> cd [nome_progetto]
+> python manage.py runserver
+(python3 anche, a seconda della versione)
+----------------
+una volta creato il progetto, puoi creare una o più app:
+> python manage.py startapp [nome_app]
+----------------
+vai in settings.py --> vai nell'array INSTALLED_APPS ed inserisci 
+'[nome_app].apps.[Nome_app (con la maiuscola)]Config',
+----------------
+crea la pagina HTML, mettila in [nome_progetto]\[nome_app]\templates\[nome_app]\[nome_pagina_esempio_home].html
+e poi scrivi il suo nome nel file "views.py" che sta nella cartella [nome_app]
+# Create your views here.
+def [nome_pagina_esempio_home] (request):
+	return render(request, '[nome_progetto]\[nome_app]\templates\[nome_app]\[nome_pagina_esempio_home].html')
+
+
+COLLEGAMENTO HTML CON DJANGO:
+---------------- opzione 1
+Nella cartella [nome_progetto] vai in urls.py e aggiungi:
+- nell'array urlpatterns il riferimento della pagina HTML:
+urlpatterns = [
+         path('admin/', admin.site.urls),
+         path([nome_app]/', views.[nome_pagina_esempio_home]),
+]
+
+- e importare la funzione nella sua relativa pagina con: 
+from [nome_app] import views
+
+ora se proverai a scrivere localhost:8000/[nome_app]/ potrai visualizzare la pagina (assicurati di aver startato con > python manage.py runserver)
+---------------- opzione 2
+oppure in maniera più efficiente e professionale deleghiamo la gestione del sito direttamente all'app creando un file urls.py dentro la cartella [nome_app]. Importiamo dal file urls la funzione path e tutti i suoi indirizzi, in questo modo nel urls.py globale non sarà necessario importare tutti gli indirizzi rallentando il codice.
+IN urls.py NELLA CARTELLA [nome_app]:
+
+urlpatterns = [
+         path('', views.[nome_app]
+]
+
+
+IN urls.py NELLA CARTELLA [nome_app]:
+
+from django.urls import path, include # aggiungi include 
+#from [nome_app] import views
+urlpatterns = [
+         path('admin/', admin.site.urls),
+         path('[nome_app]/', include ('[nome_app].urls')),
+]

@@ -1,5 +1,6 @@
 from pyexpat import model
-from re import S
+from django.utils.timezone import now
+
 from django.db import models
 
 # Create your models here.
@@ -55,6 +56,8 @@ class Fly(models.Model):
     tot_passeggeri = models.IntegerField()
     andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "inizio")
     ritorno = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
+    date_andata = models.DateField(default=now)
+    date_ritorno = models.DateField(default=now, blank=True)
 
 class Prenotazione(models.Model):
     andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
