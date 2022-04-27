@@ -4,9 +4,13 @@ from .models import Fly, Prenotazione
 class FlyForm(forms.ModelForm):
     class Meta:
         model = Fly
-        fields = ['andata','ritorno','date_andata','date_ritorno']
+        fields = ['partenza','arrivo','date_andata','date_ritorno']
 
 class PrenotazioneForm(forms.ModelForm):
     class Meta:
         model = Prenotazione
-        fields = ['unique_id','name','surname','email','address','city','state','zip_code','fly','fly_seat',]
+        fields = ['andata_e_o_ritorno','partenza','arrivo','date_andate','date_ritorno','neonati','bambini','adulti']
+
+
+
+#'unique_id','name','surname','email','address','city','state','zip_code','fly','fly_seat',

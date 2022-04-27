@@ -1,5 +1,5 @@
 {% extends 'sito_gestione_voli/common.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
       <div class="container position-absolute top-50 start-50 translate-middle">
         <div class="card ">
@@ -7,12 +7,13 @@
             <ul class="nav nav-pills card-header-pills">
               <div class="container row">
                 <div class="col-2 custom-control custom-radio">
-                  <input type="radio" id="R1" name="andata_e_ritorno" class="custom-control-input">
+                  <input type="radio" id="R1" name="andata_e_o_ritorno" class="custom-control-input">
+                  {% render_field flyForm.andata_e_o_ritorno name='andata_e_o_ritorno'%}
                   <label class="custom-control-label fs-5">Andata e ritorno</label> <!--id: andata_ritorno-->
                 </div>
                 <div class="col custom-control custom-radio">
-                  <input type="radio" id="R2" name="soltanto_andata" class="custom-control-input" checked>
-                  {% render_field flyForm.arrive class='form-select' name='' id="arrivoForm" hidden=True%}
+                  <input type="radio" id="R2" name="andata_e_o_ritorno" class="custom-control-input" checked> <!--name="soltanto_andata"-->
+                  {% render_field flyForm.andata_e_o_ritorno name='andata_e_o_ritorno'%}
                   <label class="custom-control-label fs-5">Solo andata</label> <!--id: solo_andata-->
                 </div>
               </div>
@@ -27,6 +28,7 @@
               <p>Andata</p>
               
               <input name="_andata" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+              {% render_field flyForm.partenza name='partenza'%}
               <datalist id="areoporti">
                 {% for i in all_airports %}
                 <option class="dropdown-item">
@@ -41,6 +43,7 @@
               <p>Ritorno</p>
               
               <input name="_ritorno" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required>
+              {% render_field flyForm.arrivo name='arrivo'%}
               <datalist id="areoporti">
                 {% for i in all_airports %}
                 <option class="dropdown-item">
@@ -105,6 +108,9 @@
               
 
             
+            </div>
+            <div>
+
             </div>
           
           

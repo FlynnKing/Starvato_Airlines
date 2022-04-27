@@ -48,26 +48,43 @@ class posti(models.Model):
         return self.stato_del_posto   
 
 
-
-
-
-
 class Fly(models.Model):
     Aircraft = models.ForeignKey(Aircraft, on_delete=models.SET_NULL, null=True)
     tot_passeggeri = models.IntegerField()
-    andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "inizio")
-    ritorno = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
+    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "inizio")
+    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
     date_andata = models.DateField(default=now)
     date_ritorno = models.DateField(default=now, blank=True)
 
 class Prenotazione(models.Model):
-    andata = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
-    ritorno = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
+    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
+    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
     date_andate = models.DateField() #assicurati che si scriva così
     date_ritorno = models.DateField() #la riga di sopra e questa sarnno presi dall'aereo...
     neonati = models.SmallIntegerField()
     bambini = models.SmallIntegerField()
     adulti = models.SmallIntegerField()
+    andata_e_o_ritorno = models.CharField(max_length=50)
+
+
+
+# pip install django-widget-tweaks INSTALLALO
+
+
+
+class andata_o_andata_e_ritorno(models.Model):
+    class partenza(models.TextChoices):
+        andata = 'Solo andata', ('Solo andata')
+        andata_ritorno = 'andata e ritorno', ('andata e ritorno')
+        
+    andata_e_o_ritonro = models.CharField(
+        max_length=25,
+        choices=partenza.choices,
+        default=partenza.andata,
+    )
+    andata_e_o_ritorno = models.ForeignKey(Prenotazione, on_delete=models.SET_NULL, null=True)
+    def __str__(self):
+        return self.andata_e_o_ritonro 
 
 class Ruolo(models.Model):
     Assistente = models.CharField(max_length=100)

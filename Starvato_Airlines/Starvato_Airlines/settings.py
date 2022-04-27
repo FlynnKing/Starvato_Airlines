@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sito_gestione_voli.apps.SitoGestioneVoliConfig',
-    'rest_framework'
+    'rest_framework',
+    'widget_tweaks'
 
 ]
 
