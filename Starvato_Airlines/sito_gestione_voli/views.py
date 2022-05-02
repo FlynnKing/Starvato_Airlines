@@ -54,7 +54,10 @@ def home (request):
         'all_airports' : all_airports,
         'flyForm':flyForm
     }
-    if flyForm.is_valid(): # vedo se i campi sono validi con gli attributi del modello relativo (variabile che descrivi nell'html)
+    
+    if flyForm.is_valid():
+        print('ciao')
+         # vedo se i campi sono validi con gli attributi del modello relativo (variabile che descrivi nell'html)
         filt = Fly.objects.filter(soltanto_andata=request.POST['andata_e_o_ritorno'], arrive=request.POST['arrive'], date=request.POST['date'], free_seats__gte = request.POST['persone'])
         #devi cambiare il link del metodo post (nell'HTML), per elaborare i dati in questa pagina
         # con il java fai apparire i voli disponibili con quelle richieste e il pulsante di conferma 
