@@ -13,7 +13,7 @@
                 </div>
                 <div class="col custom-control custom-radio">
                   <input type="radio" id="R2" name="andata_e_o_ritorno" class="custom-control-input" checked> <!--name="soltanto_andata"-->
-                  {% render_field flyForm.andata_e_o_ritorno name='andata_e_o_ritorno'%}
+                  {% render_field flyForm.soltanto_andata name='soltanto_andata'%}
                   <label class="custom-control-label fs-5">Solo andata</label> <!--id: solo_andata-->
                 </div>
               </div>
@@ -21,14 +21,19 @@
           </div>
 
           
-          <form class="needs-validation" novalidate method="POST" action="{% url 'riepilogo' %}">
+          <form class="needs-validation" novalidate method="POST" action="">
             {% csrf_token %} 
           <div class="card-body row m-2 bg-opacity-10">
             <div class="col">
               <p>Andata</p>
+              <!-- <input name="partenza" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required> -->
               
+<<<<<<< HEAD
              
               {% render_field flyForm.partenza class="form-control" name='partenza'%}
+=======
+              {% render_field flyForm._andata name='_andata' class="form-control" %}
+>>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
               <datalist id="areoporti">
                 {% for i in all_airports %}
                 <option class="dropdown-item">
@@ -43,7 +48,11 @@
               <p>Ritorno</p>
               
               
+<<<<<<< HEAD
               {% render_field flyForm.arrivo class="form-control" name='arrivo'%}
+=======
+              {% render_field flyForm._ritorno  name="_ritorno" class="form-control"%}
+>>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
               <datalist id="areoporti">
                 {% for i in all_airports %}
                 <option class="dropdown-item">
@@ -61,9 +70,14 @@
               
               <div class="row ">
                 <div class="col-5 " style="margin-top: 1rem;">
-                  <div class="row" >
+                  <div class="row">
                     <div class="col" style="margin-top: 0.35rem;">data di andata: </div>
+<<<<<<< HEAD
                     <div class="col" style="margin-left: -17rem;"> {% render_field flyForm.date_andata class="form-control" type="date" %}</div> <!--id: andata-->
+=======
+                    
+                    <div class="col" style="margin-left: -17rem;">{% render_field flyForm.date_andata name="date_andata" type="date" class="form-control" placeholder="digitare destinazione" min="" onchange="Data()"}  <!--id: andata-->
+>>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
                   </div>
                   
                   
@@ -72,19 +86,24 @@
                 <div class="col-2" style="margin-top: 1rem; display: none;">
                   <a style="margin-right: 1rem; ">Neonati:</a> 
                   <button type="button" class="btn btn-secondary" onclick="neo(1)">+</button>
-                  <a name="_neonati" id="neonati" value="0" >0</a> 
+                  <a name="_neonati" id="neonati" value="0">{% render_field flyForm._neonati %}</a>
+                  
                   <button type="button" class="btn btn-secondary" onclick="neo(0)">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Bambini:</a> 
                   <button type="button" class="btn btn-secondary" onclick="bam(1)">+</button>
+<<<<<<< HEAD
                   
+=======
+                  <a name="_bambini" id="bambini" value="0">{% render_field flyForm._bambini %}</a> 
+>>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
                   <button type="button" class="btn btn-secondary" onclick="bam(0)">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Adulti:</a> 
                   <button type="button" class="btn btn-secondary" onclick="adu(1)">+</button>
-                  <a name="_adulti" id="adulti" value="0">1</a> 
+                  <a name="_adulti" id="adulti" value="0">{% render_field flyForm._adulti %}</a> 
                   <button type="button" class="btn btn-secondary" onclick="adu(0)">-</button>
                 </div>
               </div>
@@ -92,9 +111,13 @@
                 <div class="col-5">
                   <div class="row" style="margin-top: 1rem">
                     <div class="col" style="margin-top: 0.35rem;">data di ritorno: </div>
+<<<<<<< HEAD
                     <div class="col" style="margin-left: -17rem;">{% render_field flyForm.date_ritorno class="form-control" type="date" %}</div> 
                         
                     
+=======
+                    <div class="col" style="margin-left: -17rem;">{% render_field flyForm.date_ritorno name="date_andata" type="date" class="form-control" placeholder="digitare destinazione" min="" onchange="data()"}</div> <!--id: ritorno-->
+>>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
                   </div>
                 </div>
                 <div class="col-2" style=" margin-left: 4.7rem;">
@@ -137,7 +160,7 @@
   {
     document.getElementById('data_ritorno').min = document.getElementById('data_andata').value;
   }
-    
+
 
   function k(utenti,segno){
     var tot = document.getElementById(utenti);
