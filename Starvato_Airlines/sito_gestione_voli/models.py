@@ -55,9 +55,7 @@ class Fly(models.Model):
     arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
     date_andata = models.DateField(default=now)
     date_ritorno = models.DateField(default=now, blank=True)
-        
 
-<<<<<<< HEAD
 #class Prenotazione(models.Model):
 #    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
 #    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
@@ -67,26 +65,6 @@ class Fly(models.Model):
 #    bambini = models.SmallIntegerField()
 #    adulti = models.SmallIntegerField()
 #    andata_e_o_ritorno = models.CharField(max_length=50)
-=======
-class Prenotazione(models.Model):
-    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
-    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
-    date_andate = models.DateField() #assicurati che si scriva così
-    date_ritorno = models.DateField() #la riga di sopra e questa sarnno presi dall'aereo...
-    neonati = models.SmallIntegerField()
-    bambini = models.SmallIntegerField()
-    adulti = models.SmallIntegerField()
-    class andata_e_o_ritorn(models.TextChoices):
-        prima_classe_libero = 'prima classe libero', ('prima classe libero')
-        prima_classe_occupato = 'prima classe occupato', ('prima classe occupato')
-        seconda_classe_libero = 'seconda classe libero', ('seconda classe libero')
-        seconda_classe_occupato = 'seconda classe occupato', ('seconda classe occupato')
-    andata_e_o_ritorno = models.CharField(
-        max_length=40,
-        choices=andata_e_o_ritorn.choices,
-        default=andata_e_o_ritorn.prima_classe_libero
-    )
->>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
 
 
 
@@ -108,19 +86,7 @@ class Prenotazione(models.Model):
 #    def __str__(self):
 #        return self.andata_e_o_ritonro 
 
-<<<<<<< HEAD
 
-=======
-class Ruolo(models.Model):
-    Assistente = models.CharField(max_length=100)
-    Pilota = models.CharField(max_length=100)
-    ass_Pilota = models.CharField(max_length=100)
-    Hostess_di_volo = models.CharField(max_length=100)
-    Hostess_di_terra = models.CharField(max_length=100)
-    ass_airport = models.CharField(max_length=100)
-    Addetto_di_Scalo = models.CharField(max_length=100) #quelli che vendono i biglietti fisicamente
-    Steward_terra = models.CharField(max_length=100)
->>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
     
 class Personale(models.Model):
     nome = models.CharField(max_length=30)
