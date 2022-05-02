@@ -55,6 +55,7 @@ class Fly(models.Model):
     arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
     date_andata = models.DateField(default=now)
     date_ritorno = models.DateField(default=now, blank=True)
+        
 
 class Prenotazione(models.Model):
     partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
@@ -64,7 +65,16 @@ class Prenotazione(models.Model):
     neonati = models.SmallIntegerField()
     bambini = models.SmallIntegerField()
     adulti = models.SmallIntegerField()
-    andata_e_o_ritorno = models.CharField(max_length=50)
+    class andata_e_o_ritorn(models.TextChoices):
+        prima_classe_libero = 'prima classe libero', ('prima classe libero')
+        prima_classe_occupato = 'prima classe occupato', ('prima classe occupato')
+        seconda_classe_libero = 'seconda classe libero', ('seconda classe libero')
+        seconda_classe_occupato = 'seconda classe occupato', ('seconda classe occupato')
+    andata_e_o_ritorno = models.CharField(
+        max_length=40,
+        choices=andata_e_o_ritorn.choices,
+        default=andata_e_o_ritorn.prima_classe_libero
+    )
 
 
 
@@ -72,19 +82,19 @@ class Prenotazione(models.Model):
 
 
 
-class andata_o_andata_e_ritorno(models.Model):
-    class partenza(models.TextChoices):
-        andata = 'Solo andata', ('Solo andata')
-        andata_ritorno = 'andata e ritorno', ('andata e ritorno')
-        
-    andata_e_o_ritonro = models.CharField(
-        max_length=25,
-        choices=partenza.choices,
-        default=partenza.andata,
-    )
-    andata_e_o_ritorno = models.ForeignKey(Prenotazione, on_delete=models.SET_NULL, null=True)
-    def __str__(self):
-        return self.andata_e_o_ritonro 
+#class andata_o_andata_e_ritorno(models.Model):
+#    class partenza(models.TextChoices):
+#        andata = 'Solo andata', ('Solo andata')
+#        andata_ritorno = 'andata e ritorno', ('andata e ritorno')
+#        
+#    andata_e_o_ritonro = models.CharField(
+#        max_length=25,
+#        choices=partenza.choices,
+#        default=partenza.andata,
+#    )
+#    andata_e_o_ritorno = models.ForeignKey(Prenotazione, on_delete=models.SET_NULL, null=True)
+#    def __str__(self):
+#        return self.andata_e_o_ritonro 
 
 class Ruolo(models.Model):
     Assistente = models.CharField(max_length=100)
