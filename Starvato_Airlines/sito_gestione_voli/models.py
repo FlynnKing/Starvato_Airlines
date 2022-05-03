@@ -86,8 +86,6 @@ class Fly(models.Model):
 #    def __str__(self):
 #        return self.andata_e_o_ritonro 
 
-
-#2 
 class Personale(models.Model):
     nome = models.CharField(max_length=30)
     cognome = models.CharField(max_length=30)
@@ -106,8 +104,10 @@ class Personale(models.Model):
         default=1,
     )
     def save(self, *args, **kwargs):
-        Persona = Personale
         super().save(*args, **kwargs)
+        self.id
+
+
 #1) MODELLO
 #ENTITY:
 #Volo
