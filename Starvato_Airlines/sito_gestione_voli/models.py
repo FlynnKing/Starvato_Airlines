@@ -87,38 +87,27 @@ class Fly(models.Model):
 #        return self.andata_e_o_ritonro 
 
 
-    
+#2 
 class Personale(models.Model):
     nome = models.CharField(max_length=30)
     cognome = models.CharField(max_length=30)
     sesso = models.CharField(max_length=20)
-    class Ruolo(models.Model):
-        Assistente = 'AS'
-        Pilota = 'PI'
-        ass_Pilota = 'AP'
-        Hostess_di_volo = 'HV'
-        Hostess_di_terra = 'HT'
-        ass_airport = 'AV'
-        Addetto_di_Scalo = 'AS',
-        Steward_terra = 'ST'
-        SCELTE = [
-            (Assistente, 'Assistente'),
-            (Pilota, 'Pilota'),
-            (ass_Pilota, 'Assistente Pilota'),
-            (Hostess_di_volo, 'puttana volante'),
-            (Hostess_di_terra, 'puttana di terra'),
-            (ass_airport, 'assistente di volo'),
-            (Addetto_di_Scalo, 'Adetto di Scalo'),
-            (Steward_terra, 'Steward terra'),
-        ]
-        ruolo = models.CharField(
-            max_length=40,
-            choices=SCELTE,
-            default=Addetto_di_Scalo,
-        )
-        luogo = models.CharField(max_length=200)
-        def is_upperclass(self):
-            return self.ruolo in {self.ass_Pilota, self.Hostess_di_terra}
+    SCELTE = (
+        (1, 'Assistente'), 
+        (2, 'Pilota'), 
+        (3, 'Assistente Pilota'), 
+        (4, 'puttana volante'), 
+        (5, 'puttana di terra'), 
+        (6, 'assistente di volo'), 
+        (7, 'Adetto di Scalo'), 
+        (8, 'Steward terra'))
+    ruolo = models.IntegerField(
+        choices=SCELTE,
+        default=1,
+    )
+    def save(self, *args, **kwargs):
+        Persona = Personale
+        super().save(*args, **kwargs)
 #1) MODELLO
 #ENTITY:
 #Volo
