@@ -6,8 +6,7 @@ admin.site.register(Aircraft)
 admin.site.register(Airport)
 admin.site.register(Fly)
 #admin.site.register(Prenotazione)
-
 admin.site.register(Personale)
-admin.site.register(posti)
+
 
 
