@@ -42,8 +42,8 @@ class Aircraft(models.Model):
 class FlyHistory(models.Model):
     Aircraft = models.ForeignKey(Aircraft, on_delete=models.SET_NULL, null=True)
     tot_passeggeri = models.IntegerField( default=60)
-    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "inizio")
-    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "fine")
+    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "_inizio")
+    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "_fine")
     date_andata = models.DateField(default=now)
     date_ritorno = models.DateField(default=now, blank=True)
 class Fly(models.Model):
@@ -66,8 +66,8 @@ class Fly(models.Model):
         history.date_ritorno = self.date_ritorno
 
 class PrenotazioneHistory(models.Model):
-    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
-    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
+    partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "_start")
+    arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "_end")
     date_andate = models.DateField() #assicurati che si scriva così
     date_ritorno = models.DateField() #la riga di sopra e questa sarnno presi dall'aereo...
     neonati = models.SmallIntegerField()

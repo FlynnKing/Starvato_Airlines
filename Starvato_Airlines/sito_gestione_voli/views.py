@@ -50,22 +50,39 @@ def get(self, request, *args, **kwargs):
 def home (request):
 
     all_airports = Airport.objects.all()
-                        # [andata_e_ritorno, soltanto_andata, _andata, _ritorno, _neonati, _bambini, _adulti, date_andata, date_ritorno]
+    # [andata_e_ritorno, soltanto_andata, _andata, _ritorno, _neonati, _bambini, _adulti, date_andata, date_ritorno]
+
+    PreForm = PrenotazioneForm()
+    if PreForm.is_valid():
+        campiBiglietto = Prenotazione.objects.filter( # devono essere uguali ai campi in form.py
+            andata_e_o_ritorno=request.POST['andata_e_o_ritorno'], 
+            partenza=request.POST['partenza'], 
+            arrivo=request.POST['arrivo'],
+            data_andata=request.POST['data_andata'],
+            data_ritorno=request.POST['data_ritorno'], 
+            neonati=request.POST['neonati'], 
+            bambini=request.POST['bambini'],
+            adulti=request.POST['adulti']
+            )
+
+
+        allFly = Fly.objects.all()
     flyForm = FlyForm() # creo prima la classe
-    context = {         # metto le variabili che mi serviranno nella pagina che riutilizzerò con Django
-        'all_airports' : all_airports,
-        'flyForm':flyForm
-    }
-    
     if flyForm.is_valid():
-        print('ciao')
-         # vedo se i campi sono validi con gli attributi del modello relativo (variabile che descrivi nell'html)
-        filt = Fly.objects.filter(soltanto_andata=request.POST['andata_e_o_ritorno'], arrive=request.POST['arrive'], date=request.POST['date'], free_seats__gte = request.POST['persone'])
-        #devi cambiare il link del metodo post (nell'HTML), per elaborare i dati in questa pagina
-        # con il java fai apparire i voli disponibili con quelle richieste e il pulsante di conferma 
-        # dopo di che una volta che l'utentre ha scelto l'aereo di andata o andata e ritorno 
-        print(filt)
-        context['voli'] = filt
+        filt = Fly.objects.filter(
+            soltanto_andata=request.POST['partenza'], 
+            arrive=request.POST['arrivo'], 
+            data_andata=request.POST['date_andata'],
+            data_ritorno=request.POST['date_ritorno']
+            )
+
+        context = {
+            'campiBiglietto' : campiBiglietto,
+            'all_airports' : all_airports,
+            'flyForm' : flyForm,
+            'voli' : filt
+        }
+        
     return render(request, 'sito_gestione_voli/index.html', context)
 
    

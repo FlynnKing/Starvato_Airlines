@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(Aircraft)
 admin.site.register(Airport)
 admin.site.register(Fly)
-#admin.site.register(Prenotazione)
+admin.site.register(Prenotazione)
 admin.site.register(Personale)
 
 

@@ -28,12 +28,9 @@
               <p>Andata</p>
               <!-- <input name="partenza" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required> -->
               
-<<<<<<< HEAD
-             
+
               {% render_field flyForm.partenza class="form-control" name='partenza'%}
-=======
-              {% render_field flyForm._andata name='_andata' class="form-control" %}
->>>>>>> 929c82bcea3a3252b68e97e648774a5f5fa549d3
+
               <datalist id="areoporti">
                 {% for i in all_airports %}
                 <option class="dropdown-item">
