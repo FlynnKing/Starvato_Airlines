@@ -77,8 +77,8 @@ class PrenotazioneHistory(models.Model):
 class Prenotazione(models.Model):
     partenza = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "start")
     arrivo = models.ForeignKey(Airport, on_delete=models.SET_NULL, null=True, related_name = "end")
-    date_andate = models.DateField() #assicurati che si scriva così
-    date_ritorno = models.DateField() #la riga di sopra e questa sarnno presi dall'aereo...
+    data_andata = models.DateField() #assicurati che si scriva così
+    data_ritorno = models.DateField() #la riga di sopra e questa sarnno presi dall'aereo...
     neonati = models.SmallIntegerField()
     bambini = models.SmallIntegerField()
     adulti = models.SmallIntegerField()

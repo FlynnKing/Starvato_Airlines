@@ -3,33 +3,20 @@
 {% block content %}
       <div class="container position-absolute top-50 start-50 translate-middle">
         <div class="card ">
-          <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-              <div class="container row">
-                <div class="col-2 custom-control custom-radio">
-                  <input type="radio" id="R1" name="andata_e_o_ritorno" class="custom-control-input">
-                  {% render_field flyForm.andata_e_o_ritorno name='andata_e_o_ritorno'%}
-                  <label class="custom-control-label fs-5">Andata e ritorno</label> <!--id: andata_ritorno-->
-                </div>
-                <div class="col custom-control custom-radio">
-                  <input type="radio" id="R2" name="andata_e_o_ritorno" class="custom-control-input" checked> <!--name="soltanto_andata"-->
-                  {% render_field flyForm.soltanto_andata name='soltanto_andata'%}
-                  <label class="custom-control-label fs-5">Solo andata</label> <!--id: solo_andata-->
-                </div>
-              </div>
-            </ul>
-          </div>
-
-          
           <form class="needs-validation" novalidate method="POST" action="">
             {% csrf_token %} 
+          
+
+          
+          
+            
           <div class="card-body row m-2 bg-opacity-10">
             <div class="col">
               <p>Andata</p>
               <!-- <input name="partenza" list="areoporti" type="text" class="form-control" id="ritorno" placeholder="digitare destinazione" required> -->
               
 
-              {% render_field flyForm.partenza class="form-control" name='partenza'%}
+              {% render_field PreForm.partenza class="form-control" name='partenza'%}
 
               <datalist id="areoporti">
                 {% for i in all_airports %}
@@ -46,7 +33,7 @@
               
               
 
-              {% render_field flyForm.arrivo class="form-control" name='arrivo'%}
+              {% render_field PreForm.arrivo class="form-control" name='arrivo'%}
 
               <datalist id="areoporti">
                 {% for i in all_airports %}
@@ -68,31 +55,30 @@
                   <div class="row">
                     <div class="col" style="margin-top: 0.35rem;">data di andata: </div>
 
-                    <div class="col" style="margin-left: -17rem;"> {% render_field flyForm.date_andata class="form-control" type="date" %}</div> <!--id: andata-->
+                    <div class="col" style="margin-left: -17rem;"> {% render_field PreForm.data_andata id="data_andata" class="form-control" type="date" %}</div> <!--id: andata-->
 
                   </div>
                   
                   
                   
                 </div>
-                <div class="col-2" style="margin-top: 1rem; display: none;">
+                <div class="col-2" style="margin-top: 1rem; ">
                   <a style="margin-right: 1rem; ">Neonati:</a> 
-                  <button type="button" class="btn btn-secondary" onclick="neo(1)">+</button>
-                  <a name="_neonati" id="neonati" value="0">{% render_field flyForm._neonati %}</a>
-                  
-                  <button type="button" class="btn btn-secondary" onclick="neo(0)">-</button>
+                  <button type="button" class="btn btn-secondary" onclick="Aumenta('neonati')">+</button>
+                  <a name="_neonati">{% render_field PreForm.neonati id="neonati" value="0" style="width: 3rem; height: 2rem;"%}</a>
+                  <button type="button" class="btn btn-secondary" onclick="Diminuisce('neonati')">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Bambini:</a> 
-                  <button type="button" class="btn btn-secondary" onclick="bam(1)">+</button>
-                  <a name="_bambini" id="bambini" value="0">{% render_field flyForm._bambini %}</a> 
-                  <button type="button" class="btn btn-secondary" onclick="bam(0)">-</button>
+                  <button type="button" class="btn btn-secondary" onclick="Aumenta('bambini')">+</button>
+                  <a name="_bambini">{% render_field PreForm.bambini id="bambini" value="0" style="width: 3rem; height: 2rem;"%}</a> 
+                  <button type="button" class="btn btn-secondary" onclick="Diminuisce('bambini')">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
                   <a style="margin-right: 1rem; ">Adulti:</a> 
-                  <button type="button" class="btn btn-secondary" onclick="adu(1)">+</button>
-                  <a name="_adulti" id="adulti" value="0">{% render_field flyForm._adulti %}</a> 
-                  <button type="button" class="btn btn-secondary" onclick="adu(0)">-</button>
+                  <button type="button" class="btn btn-secondary" onclick="Aumenta('adulti')">+</button>
+                  <a name="_adulti">{% render_field PreForm.adulti id="adulti" value="0" style="width: 3rem; height: 2rem;" %}</a> 
+                  <button type="button" class="btn btn-secondary" onclick="Diminuisce('adulti')">-</button>
                 </div>
               </div>
               <div class="row">
@@ -100,7 +86,7 @@
                   <div class="row" style="margin-top: 1rem">
                     <div class="col" style="margin-top: 0.35rem;">data di ritorno: </div>
 
-                    <div class="col" style="margin-left: -17rem;">{% render_field flyForm.date_ritorno class="form-control" type="date" %}</div> 
+                    <div class="col" style="margin-left: -17rem;">{% render_field PreForm.data_ritorno id="data_ritorno" class="form-control" type="date" %}</div> 
                         
                     
 
@@ -148,34 +134,12 @@
   }
 
 
-  function k(utenti,segno){
-    var tot = document.getElementById(utenti);
-    var t = tot.innerHTML;
-    if (segno==0){
-      if (t >0){
-        t--;
-      }
-      if (utenti == "adulti" && t<1)
-      {
-        t=1;
-      }
-    } 
-    if (segno==1){
-      t++;
-    }
-    tot.innerHTML = t;
+
+  function Aumenta(utente){
+    document.getElementById(utente).value = document.getElementById(utente).valueAsNumber + 1;
   }
-  function neo(segno){
-    u="neonati";
-    k(u,segno);
-  }
-  function bam(segno){
-    u="bambini";
-    k(u,segno);
-  }
-  function adu(segno){
-    u="adulti";
-    k(u,segno);
+  function Diminuisce(utente){
+    document.getElementById(utente).value -= 1;
   }
   
 
