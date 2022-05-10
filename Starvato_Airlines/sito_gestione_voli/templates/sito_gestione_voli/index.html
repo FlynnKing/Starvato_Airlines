@@ -65,7 +65,7 @@
                 <div class="col-2" style="margin-top: 1rem; ">
                   <a style="margin-right: 1rem; ">Neonati:</a> 
                   <button type="button" class="btn btn-secondary" onclick="Aumenta('neonati')">+</button>
-                  <a name="_neonati">{% render_field PreForm.neonati id="neonati" value="0" style="width: 3rem; height: 2rem;"%}</a>
+                  <a name="_neonati">{% render_field PreForm.neonati id="neonati" value="0" style="width: 3rem; height: 2rem;" min=0%}</a>
                   <button type="button" class="btn btn-secondary" onclick="Diminuisce('neonati')">-</button>
                 </div>
                 <div class="col-2" style="margin-top: 1rem;">
@@ -139,7 +139,10 @@
     document.getElementById(utente).value = document.getElementById(utente).valueAsNumber + 1;
   }
   function Diminuisce(utente){
-    document.getElementById(utente).value -= 1;
+    if (document.getElementById(utente).value > 0){
+      document.getElementById(utente).value -= 1;
+    }
+    
   }
   
 

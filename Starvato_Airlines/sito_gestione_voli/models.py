@@ -27,13 +27,17 @@ class Airport(models.Model):
         super().save(*args, **kwargs)
         self.id
 
-
+# CON BLANK DICI CHE IL CAMPO NON E' NECESSARIO 
 class Aircraft(models.Model):
     name = models.CharField(max_length=200)
     locate = models.CharField(max_length=300)
     country = models.CharField(max_length=100)
     region = models.CharField(max_length=50)
     tot_posti = models.IntegerField( default=60)
+
+    class Meta:
+        verbose_name = 'Aereo'
+        verbose_name_plural = 'Aerei'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -90,8 +94,8 @@ class Prenotazione(models.Model):
         history = PrenotazioneHistory()
         history.partenza = self.partenza
         history.arrivo = self.arrivo
-        history.date_andate = self.date_andate
-        history.date_ritorno = self.date_ritorno
+        history.date_andate = self.data_andata
+        history.date_ritorno = self.data_ritorno
         history.neonati = self.neonati
         history.bambini = self.bambini
         history.adulti = self.adulti
